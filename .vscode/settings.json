@@ -6,7 +6,10 @@
     "typescript.tsdk": "none_modules/typescript/lib",
     "typescript.enablePromptUseWorkspaceTsdk": true,
     "cSpell.words": [
-        "fibonacci"
+        "facebook",
+        "fibonacci",
+        "linkdin",
+        "linkedin"
     ],
     "css.lint.unknownAtRules": "ignore",
 }

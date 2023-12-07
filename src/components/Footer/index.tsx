@@ -1,10 +1,11 @@
 import Link from 'next/link';
 import SelectLang from './SelectLang';
+import ListIcons from './ListIcons';
 
 function Footer(props: { className: string }) {
   return (
-    <footer className={`${props.className} flex justify-center`}>
-      <ul className="grid grid-cols-4  w-full justify-between mt-16">
+    <footer className={`${props.className} flex`}>
+      <ul className="grid grid-cols-4  w-full justify-between pt-16">
         <li>
           <div>
             <ul className="grid text-left gap-6">
@@ -20,7 +21,10 @@ function Footer(props: { className: string }) {
             </ul>
           </div>
         </li>
-        <li className="grid gap-9 text-start m-auto">
+        <li
+          className="grid gap-7 text-start m-auto"
+          style={{ marginTop: '28%' }}
+        >
           <h3 className="text-primaryColor">MENU</h3>
           <div className="grid grid-cols-1">
             <Link
@@ -37,20 +41,21 @@ function Footer(props: { className: string }) {
             </Link>
           </div>
         </li>
-        <li className="grid gap-9 text-start m-auto">
+        <li
+          className="grid gap-7 text-start m-auto"
+          style={{ marginTop: '28%' }}
+        >
           <h3 className="text-primaryColor">CONTEÚDO</h3>
           <div className="grid grid-cols-1">
-            <Link
-              className=".text-xl hover:text-secondaryColorHover whitespace-nowrap"
-              href="/"
-            >
-              Quem Somos
+            <Link href="/">
+              <span className=".text-xl hover:text-secondaryColorHover whitespace-nowrap">
+                E-books
+              </span>
             </Link>
-            <Link
-              className=".text-xl hover:text-secondaryColorHover whitespace-nowrap "
-              href="/"
-            >
-              Cases
+            <Link href="/">
+              <span className=".text-xl hover:text-secondaryColorHover whitespace-nowrap ">
+                Fórmulas prontas
+              </span>
             </Link>
           </div>
         </li>
@@ -63,40 +68,7 @@ function Footer(props: { className: string }) {
               <h3 className="text-primaryColor">SOCIAL</h3>
             </li>
             <li>
-              <ul className="grid grid-cols-4">
-                <li>
-                  <Link
-                    className=".text-xl hover:text-secondaryColorHover whitespace-nowrap"
-                    href="/"
-                  >
-                    icon
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    className=".text-xl hover:text-secondaryColorHover whitespace-nowrap"
-                    href="/"
-                  >
-                    icon
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    className=".text-xl hover:text-secondaryColorHover whitespace-nowrap"
-                    href="/"
-                  >
-                    icon
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    className=".text-xl hover:text-secondaryColorHover whitespace-nowrap"
-                    href="/"
-                  >
-                    icon
-                  </Link>
-                </li>
-              </ul>
+              <ListIcons />
             </li>
           </ul>
         </li>

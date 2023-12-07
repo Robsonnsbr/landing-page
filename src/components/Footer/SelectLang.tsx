@@ -13,12 +13,12 @@ export default function SelectLang() {
   }
 
   return (
-    <div className="text-black flex items-center">
-      <div className="m-1">
+    <div className="text-black flex items-center justify-end gap-2 p-1">
+      <div>
         {language === 'pt-BR' ? (
-          <Image src={flagBR} width={48} height={48} alt="bandeira do brasil" />
+          <Image src={flagBR} width={55} height={39} alt="bandeira do brasil" />
         ) : (
-          <div style={{ width: '46px', height: '32px' }}></div>
+          <div style={{ width: '55px', height: '39px' }}></div>
         )}
       </div>
       <select
