@@ -3,14 +3,26 @@ import Header from '@/components/Header';
 
 export default function Home() {
   return (
-    <>
-      <Header />
-      <hr />
-      <main>
-        <div>MAIN</div>
+    <div className="Wrapper-container">
+      <Header className="class-Header" />
+      <main className="class-Main">
+        <div>
+          <span>main</span>
+        </div>
+        <div>
+          <span>main</span>
+        </div>
+        <div>
+          <span>main</span>
+        </div>
+        <div>
+          <span>main</span>
+        </div>
+        <div>
+          <span>main</span>
+        </div>
       </main>
-      <hr />
-      <Footer />
-    </>
+      <Footer className="class-Footer" />
+    </div>
   );
 }

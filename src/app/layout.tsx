@@ -30,7 +30,7 @@ export default function RootLayout({ children }: children) {
       <link rel="icon" href="./favicon.ico" sizes="any" />
       <body
         suppressHydrationWarning={true}
-        className={isValidFont() ? isValidFont().className : 'font-sans'}
+        className={isValidFont() ? isValidFont()?.className : 'font-sans'}
       >
         {children}
       </body>

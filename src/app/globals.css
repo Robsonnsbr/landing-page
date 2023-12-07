@@ -9,15 +9,15 @@
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
 }
-/* @media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
   }
-} */
+}
 html, body {
-  height: 100vh;
+  min-height: 100vh;
 }
 body {
   color: rgb(var(--foreground-rgb));
@@ -30,3 +30,56 @@ body {
 }
 
 /* plus styles project landingPage */
+
+
+:root {
+  --primary-background-color: #380158;
+  --primary-background-color-footer: #26003B;
+  --primary-background-color-border: #AFAFAF;
+
+  --primary-color: #FFFFFF;
+  --primary-color-border: #C9C9C9;
+}
+
+.Wrapper-container {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+
+img {
+  max-width: 100%;
+}
+
+h1,h2, p, span, a {
+  color: var(--primary-color);
+  font-size: 18px;
+}
+
+
+:root {
+  --min-h-header: 129px;
+  --min-h-footer: 400px;
+}
+
+.class-Header {
+  background-color: var(--primary-background-color);
+  min-width: 100%;
+  min-height: var(--min-h-header);
+  max-height: fit-content;
+  border-bottom: 0.5px solid var(--primary-background-color-border);
+  padding: 0 112px;
+}
+
+.class-Footer {
+  height: var(--min-h-footer);
+  background-color: var(--primary-background-color-footer);
+  padding: 0 112px;
+}
+
+.class-Main {
+  min-height: calc(100vh - (var(--min-h-header) - var(--min-h-footer)));
+  background-color: var(--primary-background-color);
+  padding: 0 112px;
+}
