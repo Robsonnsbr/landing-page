@@ -13,23 +13,21 @@ export default function SelectLang() {
   }
 
   return (
-    <div className="text-black flex items-center justify-end gap-2 p-1">
-      <div>
-        {language === 'pt-BR' ? (
-          <Image src={flagBR} width={55} height={39} alt="bandeira do brasil" />
-        ) : (
-          <div style={{ width: '55px', height: '39px' }}></div>
+    <div className="grid grid-col-2 md:grid-cols-2 w-full h-12 items-center text-black justify-end">
+      <div className="col-star-1 w-14 md:col-start-3 items-start">
+        {language === 'pt-BR' && (
+          <Image src={flagBR} width={52} height={36} alt="bandeira do brasil" />
         )}
       </div>
       <select
         id="language"
-        className="p-1 border rounded-sm"
+        className="col-start-2 md:col-start-4 w-14 border rounded-sm md:w-auto h-9"
         value={language}
         onChange={(e) => showSelected(e.target.value)}
       >
         <option value="pt-BR">BRA</option>
-        <option value="US">EN</option>
-        <option value="spanish">ES</option>
+        <option value="US">ENG</option>
+        <option value="spanish">ESP</option>
       </select>
     </div>
   );

@@ -15,10 +15,13 @@ const config: Config = {
       },
       backgroundColor: {
         secondaryColor: '#0DC74F',
-        secondaryColorHover: '#0FCE33'
+        secondaryColorHover: '#0FCE33',
+        thirdColor: '#F7F7F7'
       },
       colors: {
         primaryColor: '#0FCE33',
+        secondaryColor: '#380158',
+        thirdColor: '#4A4A4A',
         secondaryColorHover: '#0FCE33'
       }
     }

@@ -3,7 +3,7 @@ import Link from 'next/link';
 export default function Header(props: { className: string }) {
   return (
     <header className={`${props.className} flex justify-center`}>
-      <ul className="grid grid-cols-4 w-full justify-between content-center">
+      <ul className="flex flex-col items-center md:grid grid-cols-4 w-full justify-between content-center">
         <li>
           <div>
             <h2 className="text-4xl text-left">agência</h2>
@@ -44,7 +44,7 @@ export default function Header(props: { className: string }) {
           </ul>
         </li>
         <li>
-          <div className="flex justify-end">
+          <div className="flex md:justify-end">
             <Link href="/">
               <button
                 className="text-base bg-secondaryColor hover:bg-secondaryColorHover h-12 w-52 rounded-md"

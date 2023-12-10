@@ -1,7 +1,7 @@
 {
     "editor.formatOnSave": false,
     "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": true
+        "source.fixAll.eslint": "explicit"
     },
     "typescript.tsdk": "none_modules/typescript/lib",
     "typescript.enablePromptUseWorkspaceTsdk": true,
@@ -9,7 +9,8 @@
         "facebook",
         "fibonacci",
         "linkdin",
-        "linkedin"
+        "linkedin",
+        "spanish"
     ],
     "css.lint.unknownAtRules": "ignore",
 }
