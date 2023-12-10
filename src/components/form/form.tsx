@@ -1,55 +1,23 @@
 'use client';
-import save from '@/app/api/submit/route';
+import save, { handleEmpty } from '@/app/api/submit/route';
 import { useRef } from 'react';
+import Button from '../common/Button';
 
-import { useFormStatus } from 'react-dom';
-
-type iForm = Record<string, string>;
-
-const objForm: iForm = {
-  name: '',
-  email: '',
-  phone: '',
-  site: '',
-  budgetMedia: ''
-};
-
-function Form() {
-  const { pending } = useFormStatus();
+export default function Form() {
   const nameRef = useRef(null);
   const emailRef = useRef(null);
   const phoneRef = useRef(null);
   const siteRef = useRef(null);
   const budgetMediaRef = useRef(null);
 
-  const handleEmpty = (objForm: iForm) => {
-    const isEmpty = Object.values(objForm).some((value) => value === '');
-    return isEmpty;
-  };
-
   const handleSubmit = async (formData: FormData) => {
-    const keys = ['name', 'email', 'phone', 'site', 'budgetMedia'];
-
-    try {
-      keys.forEach((key) => {
-        const value = formData.get(key);
-        objForm[key] = typeof value === 'string' ? value : '';
-      });
-
-      const formIsEmpty = handleEmpty(objForm);
-
-      if (!formIsEmpty) {
-        await save(objForm);
-        console.log('Envie!', objForm);
-        console.log(pending);
-      }
-    } catch (error: unknown) {
-      console.log('Error:', error);
-    } finally {
-      Object.keys(objForm).forEach((key) => {
-        delete objForm[key];
-      });
+    const isValid = handleEmpty(formData);
+    if (!isValid) {
+      await save(formData);
+      alert('Envio realizado!');
+      return;
     }
+    alert('Verifique os campos!');
   };
 
   return (
@@ -66,13 +34,13 @@ function Form() {
               placeholder="Nome completo"
               name="name"
               ref={nameRef}
-              required
+              // required
             />
           </li>
           <li>
             <input
               className="bg-thirdColor w-full h-10 rounded-sm"
-              type="text"
+              type="email"
               placeholder="E-mail profissional"
               name="email"
               ref={emailRef}
@@ -84,7 +52,7 @@ function Form() {
               className="bg-thirdColor w-full h-10 rounded-sm"
               type="text"
               placeholder="Celular/Whatsapp"
-              name="phone"
+              name="tel"
               ref={phoneRef}
               required
             />
@@ -92,7 +60,7 @@ function Form() {
           <li>
             <input
               className="bg-thirdColor w-full h-10 rounded-sm"
-              type="text"
+              type="site"
               placeholder="Site"
               name="site"
               ref={siteRef}
@@ -119,16 +87,8 @@ function Form() {
             </select>
           </li>
         </ul>
-        <button
-          aria-disabled={pending}
-          className="bg-primaryColor h-12 w-full rounded-sm"
-          type="submit"
-        >
-          <span className="text-white">ENVIAR</span>
-        </button>
+        <Button />
       </form>
     </div>
   );
 }
-
-export default Form;
