@@ -4,17 +4,26 @@ import { useRef } from 'react';
 import Button from '../common/Button';
 
 export default function Form() {
-  const nameRef = useRef(null);
-  const emailRef = useRef(null);
-  const phoneRef = useRef(null);
-  const siteRef = useRef(null);
-  const budgetMediaRef = useRef(null);
+  const nameRef = useRef<HTMLInputElement>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
+  const phoneRef = useRef<HTMLInputElement>(null);
+  const siteRef = useRef<HTMLInputElement>(null);
+  const budgetMediaRef = useRef<HTMLSelectElement>(null);
+
+  const clearInputs = () => {
+    nameRef.current!.value = '';
+    emailRef.current!.value = '';
+    phoneRef.current!.value = '';
+    siteRef.current!.value = '';
+    budgetMediaRef.current!.value = 'default' ?? '';
+  };
 
   const handleSubmit = async (formData: FormData) => {
     const isValid = handleEmpty(formData);
     if (!isValid) {
       await save(formData);
       alert('Envio realizado!');
+      clearInputs();
       return;
     }
     alert('Verifique os campos!');
