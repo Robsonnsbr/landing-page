@@ -1,32 +1,57 @@
 'use client';
-import { useState } from 'react';
+import save from '@/app/api/submit/route';
+import { FormEvent, useRef, useState } from 'react';
 
-interface iForm {
-  name: string;
-  email: string;
-  phone: string;
-  site: string;
-  budgetMedia: string;
-}
+import { useFormStatus } from 'react-dom';
+
+type iForm = Record<string, string>;
+
+const objForm: iForm = {
+  name: '',
+  email: '',
+  phone: '',
+  site: '',
+  budgetMedia: ''
+};
 
 function Form() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [site, setSite] = useState('');
-  const [budgetMedia, setBudgetMedia] = useState('');
+  const [selectedBudgetMedia, setSelectedBudgetMedia] =
+    useState('Selecione um Valor');
+  const { pending } = useFormStatus();
+  const nameRef = useRef(null);
+  const emailRef = useRef(null);
+  const phoneRef = useRef(null);
+  const siteRef = useRef(null);
+  const budgetMediaRef = useRef(null);
 
-  const sendForm = (e: React.MouseEvent) => {
-    e.preventDefault();
-    const objForm: iForm = {
-      name,
-      email,
-      phone,
-      site,
-      budgetMedia
-    };
+  const handleEmpty = (objForm: iForm) => {
+    const isEmpty = Object.values(objForm).some((value) => value === '');
+    return isEmpty;
+  };
 
-    console.log('Envie!', objForm);
+  const handleSubmit = async (formData: FormData) => {
+    const keys = ['name', 'email', 'phone', 'site', 'budgetMedia'];
+
+    try {
+      keys.forEach((key) => {
+        const value = formData.get(key);
+        objForm[key] = typeof value === 'string' ? value : '';
+      });
+
+      const formIsEmpty = handleEmpty(objForm);
+
+      if (!formIsEmpty) {
+        await save(objForm);
+        console.log('Envie!', objForm);
+        console.log(pending);
+      }
+    } catch (error: unknown) {
+      console.log('Error:', error);
+    } finally {
+      Object.keys(objForm).forEach((key) => {
+        delete objForm[key];
+      });
+    }
   };
 
   return (
@@ -34,14 +59,15 @@ function Form() {
       <h1 className="text-secondaryColor text-2xl font-bold pt-3 pb-6">
         Fale com um especialista
       </h1>
-      <form method="get">
+      <form action={handleSubmit}>
         <ul className="grid grid-rows-5 gap-4 pb-4">
           <li>
             <input
               className="bg-thirdColor w-full h-10 rounded-sm"
               type="text"
               placeholder="Nome completo"
-              onChange={(e) => setName(e.target.value)}
+              name="name"
+              ref={nameRef}
               required
             />
           </li>
@@ -50,7 +76,8 @@ function Form() {
               className="bg-thirdColor w-full h-10 rounded-sm"
               type="text"
               placeholder="E-mail profissional"
-              onChange={(e) => setEmail(e.target.value)}
+              name="email"
+              ref={emailRef}
               required
             />
           </li>
@@ -59,7 +86,8 @@ function Form() {
               className="bg-thirdColor w-full h-10 rounded-sm"
               type="text"
               placeholder="Celular/Whatsapp"
-              onChange={(e) => setPhone(e.target.value)}
+              name="phone"
+              ref={phoneRef}
               required
             />
           </li>
@@ -68,19 +96,23 @@ function Form() {
               className="bg-thirdColor w-full h-10 rounded-sm"
               type="text"
               placeholder="Site"
-              onChange={(e) => setSite(e.target.value)}
+              name="site"
+              ref={siteRef}
               required
             />
           </li>
           <li>
             <select
               className="bg-thirdColor w-full h-10 rounded-sm"
-              name="Orçamento para mida"
               id="budgetMedia"
-              value={budgetMedia}
+              name="budgetMedia"
+              ref={budgetMediaRef}
+              defaultValue="default"
               required
-              onChange={(e) => setBudgetMedia(e.target.value)}
             >
+              <option value="default" disabled>
+                Escolha uma opção
+              </option>
               <option value="valor1">valor1</option>
               <option value="valor2">valor2</option>
               <option value="valor3">valor3</option>
@@ -90,9 +122,9 @@ function Form() {
           </li>
         </ul>
         <button
+          aria-disabled={pending}
           className="bg-primaryColor h-12 w-full rounded-sm"
           type="submit"
-          onClick={(e) => sendForm(e)}
         >
           <span className="text-white">ENVIAR</span>
         </button>
