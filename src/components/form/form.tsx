@@ -1,6 +1,6 @@
 'use client';
 import save from '@/app/api/submit/route';
-import { FormEvent, useRef, useState } from 'react';
+import { useRef } from 'react';
 
 import { useFormStatus } from 'react-dom';
 
@@ -15,8 +15,6 @@ const objForm: iForm = {
 };
 
 function Form() {
-  const [selectedBudgetMedia, setSelectedBudgetMedia] =
-    useState('Selecione um Valor');
   const { pending } = useFormStatus();
   const nameRef = useRef(null);
   const emailRef = useRef(null);
